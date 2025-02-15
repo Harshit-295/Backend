@@ -62,6 +62,7 @@ const userSchema = new Schema(
 // }
 
 userSchema.pre("save", async function (next) {
+    console.log(this.password);
     if(!this.isModified("password")) return next();
     // haar bar password chnage na ho isliye
     this.password = await bcrypt.hash(this.password, 10)

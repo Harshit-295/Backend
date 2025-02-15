@@ -121,14 +121,12 @@ const loginUser = asyncHandler(async (req, res) =>{
     const user = await User.findOne({
         $or: [{username},{email}]
     })
-    console.log(user.password);
     if (!user) {
-        console.log("error is here")
         throw new ApiError(404, "User does not exist")
     }
 
    const isPasswordValid = await user.isPasswordCorrect(password)
-
+   console.log(isPasswordValid);
    if (!isPasswordValid) {
     console.log("error is here")
     throw new ApiError(401, "Invalid user credentials")
